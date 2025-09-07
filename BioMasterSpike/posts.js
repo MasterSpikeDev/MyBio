@@ -18,8 +18,8 @@ export const POSTS = [
             },
             {
                 title: {
-                    pt: "Pacote de Skins — Marketplace",
-                    en: "Skin Pack — Marketplace"
+                    pt: "Freelancer - BiomeCraft",
+                    en: "Freelancer - BiomeCraft"
                 },
                 desc: {
                     pt: "Pack de skins temático inspirado em fantasia urbana.",
