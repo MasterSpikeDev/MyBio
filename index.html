@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,121 +8,426 @@
   <meta name="description" content="Bio global com dois estados: principal e sobre mim." />
   <style>
     :root {
-      --bg:#0b0b0c; --card:#141416; --text:#e5e7eb; --muted:#9aa0a6; --border:#26272b; --accent:#60a5fa;
-      --bg-main-image:url('assets/background/bg-main.jpg');
-      --bg-about-image:url('assets/background/bg-about.jpg');
-      --bg-portfolio-image:url('assets/background/bg-portfolio.jpg');
-      --bg-opacity:1; --bg-blur:2px;
-    }
-    @media (prefers-color-scheme: light){
-      :root{ --bg:#fafafa; --card:#fff; --text:#111827; --muted:#536471; --border:#e5e7eb; --accent:#2563eb }
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;
-      color:var(--text);background:var(--bg);min-height:100dvh;overflow-x:hidden
-    }
-    .bg-layer{position:fixed;inset:0;background-size:cover;background-position:center;opacity:0;filter:blur(var(--bg-blur));transition:opacity .5s ease;z-index:0}
-    #bg-main{background-image:var(--bg-main-image)}
-    #bg-about{background-image:var(--bg-about-image)}
-    #bg-portfolio{background-image:var(--bg-portfolio-image)}
-    body[data-view="main"] #bg-main{opacity:var(--bg-opacity)}
-    body[data-view="about"] #bg-about{opacity:var(--bg-opacity)}
-    body[data-view="portfolio"] #bg-portfolio{opacity:var(--bg-opacity)}
-
-    .shell{max-width:980px;margin:0 auto;padding:24px;position:relative;z-index:1}
-    .topbar{display:flex;justify-content:flex-end}
-    .lang{border:1px solid var(--border);border-radius:12px;padding:6px 10px;background:transparent;color:var(--text)}
-    .lang select{appearance:none;background:transparent;border:none;color:inherit;font:inherit;cursor:pointer}
-
-    .card{
-      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,0)),var(--card);
-      border:1px solid var(--border);border-radius:24px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.15);
-      transition:transform .4s ease,opacity .4s ease;position:relative;z-index:1
+      --bg: #0b0b0c;
+      --card: #141416;
+      --text: #e5e7eb;
+      --muted: #9aa0a6;
+      --border: #26272b;
+      --accent: #60a5fa;
+      --bg-main-image: url('assets/background/bg-main.jpg');
+      --bg-about-image: url('assets/background/bg-about.jpg');
+      --bg-portfolio-image: url('assets/background/bg-portfolio.jpg');
+      --bg-opacity: 1;
+      --bg-blur: 2px;
     }
 
-    .main-grid{display:grid;gap:18px;grid-template-columns:160px 1fr;align-items:center}
-    @media (max-width:780px){.main-grid{grid-template-columns:1fr;text-align:center}}
-
-    .avatar{width:160px;height:160px;border-radius:22px;overflow:hidden;border:1px solid var(--border);background:#222;box-shadow:0 10px 28px rgba(0,0,0,.25);margin:auto;transition:transform .4s ease}
-    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-
-    .nickname{font-size:1.8rem;font-weight:900;letter-spacing:.2px}
-    .realname{font-size:1.8rem;font-weight:900;letter-spacing:.2px;display:none}
-    .headline{color:var(--muted);margin-top:6px;display:none}
-    .about-text{line-height:1.7;font-size:1.05rem;margin-top:10px;display:none}
-
-    .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px}
-    .btn{
-      display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;color:var(--text);
-      border:1px solid var(--border);padding:12px;border-radius:12px;font-weight:700;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0));
-      transition:transform .2s ease;cursor:pointer
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #fafafa;
+        --card: #fff;
+        --text: #111827;
+        --muted: #536471;
+        --border: #e5e7eb;
+        --accent: #2563eb
+      }
     }
-    .btn:hover{transform:translateY(-1px)}
 
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);padding:10px 14px;border-radius:999px;background:transparent;color:var(--text);
-      text-decoration:none;font-weight:800;cursor:pointer;transition:transform .2s ease
+    * {
+      box-sizing: border-box
     }
-    .pill:hover{outline:2px solid color-mix(in oklab,var(--accent) 60%, white 0%);outline-offset:2px;transform:translateY(-1px)}
 
-    footer{margin-top:16px;color:var(--muted);font-size:.9rem;text-align:center}
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100dvh;
+      overflow-x: hidden
+    }
+
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      filter: blur(var(--bg-blur));
+      transition: opacity .5s ease;
+      z-index: 0
+    }
+
+    #bg-main {
+      background-image: var(--bg-main-image)
+    }
+
+    #bg-about {
+      background-image: var(--bg-about-image)
+    }
+
+    #bg-portfolio {
+      background-image: var(--bg-portfolio-image)
+    }
+
+    body[data-view="main"] #bg-main {
+      opacity: var(--bg-opacity)
+    }
+
+    body[data-view="about"] #bg-about {
+      opacity: var(--bg-opacity)
+    }
+
+    body[data-view="portfolio"] #bg-portfolio {
+      opacity: var(--bg-opacity)
+    }
+
+    .shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px;
+      position: relative;
+      z-index: 1
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: flex-end
+    }
+
+    .lang {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 6px 10px;
+      background: var(--card);
+      /* antes era transparent */
+      color: var(--text);
+    }
+
+    .lang select {
+      appearance: none;
+      background: transparent;
+      border: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+    }
+
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, 0)), var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+      transition: transform .4s ease, opacity .4s ease;
+      position: relative;
+      z-index: 1
+    }
+
+    .main-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 160px 1fr;
+      align-items: center
+    }
+
+    @media (max-width:780px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+        text-align: center
+      }
+    }
+
+    .avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #222;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .25);
+      margin: auto;
+      transition: transform .4s ease
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .nickname {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: .2px
+    }
+
+    .realname {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: .2px;
+      display: none
+    }
+
+    .headline {
+      color: var(--muted);
+      margin-top: 6px;
+      display: none
+    }
+
+    .about-text {
+      line-height: 1.7;
+      font-size: 1.05rem;
+      margin-top: 10px;
+      display: none
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 14px
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 12px;
+      font-weight: 700;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, 0));
+      transition: transform .2s ease;
+      cursor: pointer
+    }
+
+    .btn:hover {
+      transform: translateY(-1px)
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s ease
+    }
+
+    .pill:hover {
+      outline: 2px solid color-mix(in oklab, var(--accent) 60%, white 0%);
+      outline-offset: 2px;
+      transform: translateY(-1px)
+    }
+
+    footer {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: .9rem;
+      text-align: center
+    }
 
     /* ===== Seções ===== */
-    #section-portfolio{display:none}
-    body[data-view="portfolio"] #section-main{display:none}
-    body[data-view="portfolio"] #section-portfolio{display:block}
+    #section-portfolio {
+      display: none
+    }
 
-    body[data-view="about"] .nickname{display:none}
-    body[data-view="about"] .realname{display:block}
-    body[data-view="about"] .headline{display:block}
-    body[data-view="about"] .about-text{display:block}
-    body[data-view="about"] .links{display:none}
-    body[data-view="about"] .avatar{transform:scale(1.02)}
+    body[data-view="portfolio"] #section-main {
+      display: none
+    }
 
-    .portfolio-header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-    .portfolio-title{font-size:1.4rem;font-weight:900;letter-spacing:.2px}
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
-    .p-card{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0))}
+    body[data-view="portfolio"] #section-portfolio {
+      display: block
+    }
+
+    body[data-view="about"] .nickname {
+      display: none
+    }
+
+    body[data-view="about"] .realname {
+      display: block
+    }
+
+    body[data-view="about"] .headline {
+      display: block
+    }
+
+    body[data-view="about"] .about-text {
+      display: block
+    }
+
+    body[data-view="about"] .links {
+      display: none
+    }
+
+    body[data-view="about"] .avatar {
+      transform: scale(1.02)
+    }
+
+    .portfolio-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .portfolio-title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: .2px
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 12px
+    }
+
+    .p-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, 0))
+    }
 
     /* Imagem inteira visível, proporção consistente */
-    .p-media{
-      width:100%;
-      height:auto;
-      aspect-ratio:16/9;
-      object-fit:contain;
-      display:block;
-      background:#111
+    .p-media {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: contain;
+      display: block;
+      background: #111
     }
-    .p-body{padding:12px}
-    .p-title{font-weight:800;margin:0 0 6px;font-size:1.05rem}
-    .p-desc{color:var(--muted);font-size:.95rem;line-height:1.5}
-    .p-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .chip{border:1px solid var(--border);border-radius:999px;padding:6px 10px;text-decoration:none;color:var(--text);font-weight:700}
+
+    .p-body {
+      padding: 12px
+    }
+
+    .p-title {
+      font-weight: 800;
+      margin: 0 0 6px;
+      font-size: 1.05rem
+    }
+
+    .p-desc {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.5
+    }
+
+    .p-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px
+    }
+
+    .chip {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700
+    }
 
     /* ===== Modal de Contato ===== */
-    .modal-backdrop[hidden]{display:none !important}
-    .modal-backdrop{
-      position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.5);backdrop-filter:blur(2px);
-      display:flex;align-items:center;justify-content:center;padding:20px;
+    .modal-backdrop[hidden] {
+      display: none !important
     }
-    .modal{
-      position:relative;width:min(520px,100%);border:1px solid var(--border);background:var(--card);
-      border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.45);padding:18px 18px 14px;animation:pop .15s ease-out;
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, .5);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
-    @keyframes pop{from{transform:scale(.98);opacity:.7}to{transform:scale(1);opacity:1}}
-    .modal h3{margin:4px 8px 8px;font-size:1.2rem;font-weight:900}
-    .contact-list{display:grid;gap:8px;margin-top:6px}
-    .contact-list a{
-      display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);
-      border:1px solid var(--border);padding:10px 12px;border-radius:10px;font-weight:700;
-      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,0));
+
+    .modal {
+      position: relative;
+      width: min(520px, 100%);
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .45);
+      padding: 18px 18px 14px;
+      animation: pop .15s ease-out;
     }
-    .modal-close{
-      position:absolute;top:10px;right:10px;width:34px;height:34px;line-height:32px;
-      border:1px solid var(--border);border-radius:999px;background:transparent;color:var(--text);
-      cursor:pointer;font-size:18px;font-weight:700;
+
+    @keyframes pop {
+      from {
+        transform: scale(.98);
+        opacity: .7
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+
+    .modal h3 {
+      margin: 4px 8px 8px;
+      font-size: 1.2rem;
+      font-weight: 900
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 6px
+    }
+
+    .contact-list a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-weight: 700;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, 0));
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      line-height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 700;
     }
   </style>
 </head>
@@ -163,10 +469,13 @@
 
           <div class="links" id="links">
             <button class="btn" id="open-contact">✉️ <b id="contact-btn-label">Contato</b></button>
-            <a class="btn" href="https://www.instagram.com/samuelvictordev" target="_blank" rel="noopener">📸 <b>Instagram</b></a>
+            <a class="btn" href="https://www.instagram.com/samuelvictordev" target="_blank" rel="noopener">📸
+              <b>Instagram</b></a>
             <a class="btn" href="https://github.com/MasterSpikeDev" target="_blank" rel="noopener">💻 <b>GitHub</b></a>
-            <a class="btn" href="https://www.linkedin.com/in/samuel-victor-b08725289" target="_blank" rel="noopener">🔗 <b>LinkedIn</b></a>
-            <a class="btn" href="https://open.spotify.com/user/mkz6ndemx7l8xetpqhldt7dkq?si=786c58533c7d4d6e" target="_blank" rel="noopener">🎵 <b>Spotify</b></a>
+            <a class="btn" href="https://www.linkedin.com/in/samuel-victor-b08725289" target="_blank" rel="noopener">🔗
+              <b>LinkedIn</b></a>
+            <a class="btn" href="https://open.spotify.com/user/mkz6ndemx7l8xetpqhldt7dkq?si=786c58533c7d4d6e"
+              target="_blank" rel="noopener">🎵 <b>Spotify</b></a>
           </div>
         </div>
       </div>
@@ -196,8 +505,10 @@
       <h3 id="contact-title">Contato</h3>
       <div class="contact-list">
         <!-- Discord: copia o nickname ao clicar -->
-        <a id="copy-email" href="#" data-handle="spikestudios8@gmail.com">🟣 <span>Email: spikestudios8@gmail.com</span></a>
-        <a id="copy-email2" href="#" data-handle="svf18062006@gmail.com">🟣 <span>Email: svf18062006@gmail.com</span></a>
+        <a id="copy-email" href="#" data-handle="spikestudios8@gmail.com">🟣 <span>Email:
+            spikestudios8@gmail.com</span></a>
+        <a id="copy-email2" href="#" data-handle="svf18062006@gmail.com">🟣 <span>Email:
+            svf18062006@gmail.com</span></a>
         <a id="copy-discord" href="#" data-handle="masterspike">🟣 <span>Discord: @masterspike</span></a>
       </div>
     </div>
@@ -220,12 +531,12 @@
     ========================== */
     const STR = {
       pt: {
-        toAbout:"🧑‍💼 Sobre mim", toMain:"← Voltar", toPortfolio:"🗂️ Portfólio",
-        portfolioTitle:"Portfólio", back:"← Voltar",
-        nick:"MasterSpike", realName:"Samuel Victor",
-        headline:"GameDev / Programador / Desenvolvedor",
-        contactBtn:"Contato", contactTitle:"Contato", close:"Fechar",
-        aboutText:[
+        toAbout: "🧑‍💼 Sobre mim", toMain: "← Voltar", toPortfolio: "🗂️ Portfólio",
+        portfolioTitle: "Portfólio", back: "← Voltar",
+        nick: "MasterSpike", realName: "Samuel Victor",
+        headline: "GameDev / Programador / Desenvolvedor",
+        contactBtn: "Contato", contactTitle: "Contato", close: "Fechar",
+        aboutText: [
           "Sou Samuel Victor. Apaixonado por Jogos, vejo jogos como uma forma de arte e adoro boas histórias.",
           "A música é trilha sonora do meu dia, especialmente rock alternativo e jazz. Estudei música por dois anos e toco alguns instrumentos, então sou do tipo que repara nos detalhes que quase ninguém nota.",
           "Apesar de tímido no começo, depois de ganhar confiança sou aquele cara que ri fácil, solta piadas ruins, gosto mesmo é de ver os outros sorrindo.",
@@ -234,12 +545,12 @@
         ]
       },
       en: {
-        toAbout:"🧑‍💼 About Me", toMain:"← Back", toPortfolio:"🗂️ Portfolio",
-        portfolioTitle:"Portfolio", back:"← Back",
-        nick:"MasterSpike", realName:"Samuel Victor",
-        headline:"GameDev / Programmer / Developer",
-        contactBtn:"Contact", contactTitle:"Contact", close:"Close",
-        aboutText:[
+        toAbout: "🧑‍💼 About Me", toMain: "← Back", toPortfolio: "🗂️ Portfolio",
+        portfolioTitle: "Portfolio", back: "← Back",
+        nick: "MasterSpike", realName: "Samuel Victor",
+        headline: "GameDev / Programmer / Developer",
+        contactBtn: "Contact", contactTitle: "Contact", close: "Close",
+        aboutText: [
           "I'm Samuel Victor. I'm passionate about games, I see them as an art form, and I love good stories.",
           "Music is the soundtrack to my day, especially alternative rock and jazz. I studied music for two years and play a few instruments, so I'm the type who notices the details that almost no one else notices.",
           "Although shy at first, once I gain confidence, I'm the kind of guy who laughs easily, cracks bad jokes, and really enjoys seeing others smile.",
@@ -252,25 +563,25 @@
     /* =========================
        IMAGENS
     ========================== */
-    const IMGS = { main:"assets/images/me-main.jpeg", about:"assets/images/me-about.jpeg" };
+    const IMGS = { main: "assets/images/me-main.jpeg", about: "assets/images/me-about.jpeg" };
 
     /* =========================
        HELPERS / ESTADO
     ========================== */
-    const $  = (q, r=document) => r.querySelector(q);
-    const $$ = (q, r=document) => [...r.querySelectorAll(q)];
+    const $ = (q, r = document) => r.querySelector(q);
+    const $$ = (q, r = document) => [...r.querySelectorAll(q)];
 
-    function detectLang(){
+    function detectLang() {
       const pref = localStorage.getItem('lang-pref');
       if (pref && pref !== 'auto') return pref;
       const nav = (navigator.language || 'en').toLowerCase();
       return nav.startsWith('pt') ? 'pt' : 'en';
     }
 
-    function setLang(lang){
+    function setLang(lang) {
       const s = STR[lang] || STR.pt;
       const view = document.body.getAttribute('data-view');
-      $('#toggle-about').textContent = (view === 'about')     ? s.toMain : s.toAbout;
+      $('#toggle-about').textContent = (view === 'about') ? s.toMain : s.toAbout;
       $('#toggle-portfolio').textContent = (view === 'portfolio') ? s.toMain : s.toPortfolio;
       $('#back-home').textContent = s.back;
 
@@ -279,7 +590,7 @@
       $('#headline').textContent = s.headline;
 
       const about = $('#about-text');
-      about.innerHTML = (Array.isArray(s.aboutText) ? s.aboutText : [s.aboutText]).map(p=>`<p>${p}</p>`).join("");
+      about.innerHTML = (Array.isArray(s.aboutText) ? s.aboutText : [s.aboutText]).map(p => `<p>${p}</p>`).join("");
 
       $('#portfolio-title').textContent = s.portfolioTitle;
       $('#foot-nick').textContent = s.nick;
@@ -290,41 +601,41 @@
       $('#close-contact')?.setAttribute('aria-label', s.close);
     }
 
-    function renderPosts(lang){
+    function renderPosts(lang) {
       const wrap = $('#portfolio-cards');
       wrap.innerHTML = "";
 
       const POSTS = getPosts();
       if (!POSTS) {
-        wrap.innerHTML = `<div class="p-desc" style="opacity:.8">${lang==='pt' ? 'Carregando posts…' : 'Loading posts…'}</div>`;
+        wrap.innerHTML = `<div class="p-desc" style="opacity:.8">${lang === 'pt' ? 'Carregando posts…' : 'Loading posts…'}</div>`;
         // quando posts.js avisar que carregou, renderiza
         const handler = () => { window.removeEventListener('posts-ready', handler); renderPosts(lang); };
         window.addEventListener('posts-ready', handler);
         return;
       }
       if (POSTS.length === 0) {
-        wrap.innerHTML = `<div class="p-desc" style="opacity:.8">${lang==='pt' ? 'Nenhum post encontrado.' : 'No posts found.'}</div>`;
+        wrap.innerHTML = `<div class="p-desc" style="opacity:.8">${lang === 'pt' ? 'Nenhum post encontrado.' : 'No posts found.'}</div>`;
         return;
       }
 
-      POSTS.forEach(p=>{
+      POSTS.forEach(p => {
         const card = document.createElement('article');
         card.className = 'p-card';
         card.innerHTML = `
-          <img class="p-media" src="${p.img}" alt="${(p.title?.[lang]||'Post')}" loading="lazy">
+          <img class="p-media" src="${p.img}" alt="${(p.title?.[lang] || 'Post')}" loading="lazy">
           <div class="p-body">
             <h4 class="p-title">${p.title?.[lang] || ''}</h4>
             <div class="p-desc">${p.desc?.[lang] || ''}</div>
             <div class="p-links">
-              ${(p.links||[]).map(l => `<a class="chip" target="_blank" rel="noopener" href="${l.href}">🔗 ${l.label?.[lang] || 'Link'}</a>`).join('')}
-              ${(p.videos||[]).map(v => `<a class="chip" target="_blank" rel="noopener" href="${v.href}">🎬 ${v.label?.[lang] || 'Vídeo'}</a>`).join('')}
+              ${(p.links || []).map(l => `<a class="chip" target="_blank" rel="noopener" href="${l.href}">🔗 ${l.label?.[lang] || 'Link'}</a>`).join('')}
+              ${(p.videos || []).map(v => `<a class="chip" target="_blank" rel="noopener" href="${v.href}">🎬 ${v.label?.[lang] || 'Vídeo'}</a>`).join('')}
             </div>
           </div>`;
         wrap.appendChild(card);
       });
     }
 
-    function go(view){
+    function go(view) {
       document.body.setAttribute('data-view', view);
       const langPref = localStorage.getItem('lang-pref') || 'auto';
       const lang = (langPref === 'auto') ? detectLang() : langPref;
@@ -348,7 +659,7 @@
     $('#lang').value = localStorage.getItem('lang-pref') || 'auto';
     setLang(initialLang);
 
-    $('#lang').addEventListener('change', (e)=>{
+    $('#lang').addEventListener('change', (e) => {
       const v = e.target.value;
       localStorage.setItem('lang-pref', v);
       const lang = (v === 'auto') ? detectLang() : v;
@@ -356,29 +667,29 @@
       if (document.body.getAttribute('data-view') === 'portfolio') renderPosts(lang);
     });
 
-    $('#toggle-about').addEventListener('click', ()=>{
+    $('#toggle-about').addEventListener('click', () => {
       const view = document.body.getAttribute('data-view');
       go(view === 'about' ? 'main' : 'about');
     });
 
-    $('#toggle-portfolio').addEventListener('click', ()=>{
+    $('#toggle-portfolio').addEventListener('click', () => {
       const view = document.body.getAttribute('data-view');
       go(view === 'portfolio' ? 'main' : 'portfolio');
     });
 
-    $('#back-home').addEventListener('click', ()=> go('main'));
+    $('#back-home').addEventListener('click', () => go('main'));
 
     /* ===== Ações do Popup de Contato ===== */
     const contactModal = $('#contact-modal');
     const openContactBtn = $('#open-contact');
     const closeContactBtn = $('#close-contact');
 
-    function openContact(){
+    function openContact() {
       contactModal.hidden = false;
       document.body.style.overflow = 'hidden';
       closeContactBtn.focus();
     }
-    function closeContact(){
+    function closeContact() {
       contactModal.hidden = true;
       document.body.style.overflow = '';
       openContactBtn.focus();
@@ -386,8 +697,8 @@
 
     openContactBtn.addEventListener('click', openContact);
     closeContactBtn.addEventListener('click', closeContact);
-    contactModal.addEventListener('click', (e)=>{ if(e.target === contactModal) closeContact(); });
-    document.addEventListener('keydown', (e)=>{ if(!contactModal.hidden && e.key === 'Escape') closeContact(); });
+    contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeContact(); });
+    document.addEventListener('keydown', (e) => { if (!contactModal.hidden && e.key === 'Escape') closeContact(); });
 
     /* ===== Discord: copiar nickname ===== */
     const discordCopy = document.getElementById('copy-discord');
@@ -407,7 +718,7 @@
         } catch {
           window.prompt(getLang() === 'pt' ? 'Copie o usuário:' : 'Copy the handle:', handle);
         } finally {
-          setTimeout(()=>{ span.textContent = original; }, 1400);
+          setTimeout(() => { span.textContent = original; }, 1400);
         }
       });
     }
@@ -429,7 +740,7 @@
         } catch {
           window.prompt(getLang() === 'pt' ? 'Copie o usuário:' : 'Copy the handle:', handle);
         } finally {
-          setTimeout(()=>{ span.textContent = original; }, 1400);
+          setTimeout(() => { span.textContent = original; }, 1400);
         }
       });
     }
@@ -451,7 +762,7 @@
         } catch {
           window.prompt(getLang() === 'pt' ? 'Copie o usuário:' : 'Copy the handle:', handle);
         } finally {
-          setTimeout(()=>{ span.textContent = original; }, 1400);
+          setTimeout(() => { span.textContent = original; }, 1400);
         }
       });
     }
@@ -460,4 +771,5 @@
     go('main');
   </script>
 </body>
+
 </html>
