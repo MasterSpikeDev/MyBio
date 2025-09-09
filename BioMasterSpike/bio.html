@@ -11,7 +11,7 @@
       --bg-main-image:url('assets/background/bg-main.jpg');
       --bg-about-image:url('assets/background/bg-about.jpg');
       --bg-portfolio-image:url('assets/background/bg-portfolio.jpg');
-      --bg-opacity:.26; --bg-blur:2px;
+      --bg-opacity:1; --bg-blur:2px;
     }
     @media (prefers-color-scheme: light){
       :root{ --bg:#fafafa; --card:#fff; --text:#111827; --muted:#536471; --border:#e5e7eb; --accent:#2563eb }
@@ -164,8 +164,9 @@
           <div class="links" id="links">
             <button class="btn" id="open-contact">✉️ <b id="contact-btn-label">Contato</b></button>
             <a class="btn" href="https://www.instagram.com/samuelvictordev" target="_blank" rel="noopener">📸 <b>Instagram</b></a>
-            <a class="btn" href="https://github.com/SEU_USUARIO" target="_blank" rel="noopener">💻 <b>GitHub</b></a>
-            <a class="btn" href="https://www.linkedin.com/in/SEU_USUARIO" target="_blank" rel="noopener">🔗 <b>LinkedIn</b></a>
+            <a class="btn" href="https://github.com/MasterSpikeDev" target="_blank" rel="noopener">💻 <b>GitHub</b></a>
+            <a class="btn" href="https://www.linkedin.com/in/samuel-victor-b08725289" target="_blank" rel="noopener">🔗 <b>LinkedIn</b></a>
+            <a class="btn" href="https://open.spotify.com/user/mkz6ndemx7l8xetpqhldt7dkq?si=786c58533c7d4d6e" target="_blank" rel="noopener">🎵 <b>Spotify</b></a>
           </div>
         </div>
       </div>
@@ -194,8 +195,9 @@
       <button class="modal-close" id="close-contact" aria-label="Fechar">×</button>
       <h3 id="contact-title">Contato</h3>
       <div class="contact-list">
-        <a href="mailto:svf18062006@gmail.com">✉️ <span>svf18062006@gmail.com</span></a>
         <!-- Discord: copia o nickname ao clicar -->
+        <a id="copy-email" href="#" data-handle="spikestudios8@gmail.com">🟣 <span>Email: spikestudios8@gmail.com</span></a>
+        <a id="copy-email2" href="#" data-handle="svf18062006@gmail.com">🟣 <span>Email: svf18062006@gmail.com</span></a>
         <a id="copy-discord" href="#" data-handle="masterspike">🟣 <span>Discord: @masterspike</span></a>
       </div>
     </div>
@@ -398,6 +400,50 @@
       discordCopy.addEventListener('click', async (e) => {
         e.preventDefault();
         const span = discordCopy.querySelector('span');
+        const original = span.textContent;
+        try {
+          await navigator.clipboard.writeText(handle);
+          span.textContent = (getLang() === 'pt') ? 'Copiado!' : 'Copied!';
+        } catch {
+          window.prompt(getLang() === 'pt' ? 'Copie o usuário:' : 'Copy the handle:', handle);
+        } finally {
+          setTimeout(()=>{ span.textContent = original; }, 1400);
+        }
+      });
+    }
+
+    const emailCopy = document.getElementById('copy-email');
+    if (emailCopy) {
+      const getLang = () => {
+        const pref = localStorage.getItem('lang-pref') || 'auto';
+        return (pref === 'auto') ? detectLang() : pref;
+      };
+      const handle = (emailCopy.dataset.handle || 'masterspike').replace(/^@/, '');
+      emailCopy.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const span = emailCopy.querySelector('span');
+        const original = span.textContent;
+        try {
+          await navigator.clipboard.writeText(handle);
+          span.textContent = (getLang() === 'pt') ? 'Copiado!' : 'Copied!';
+        } catch {
+          window.prompt(getLang() === 'pt' ? 'Copie o usuário:' : 'Copy the handle:', handle);
+        } finally {
+          setTimeout(()=>{ span.textContent = original; }, 1400);
+        }
+      });
+    }
+
+    const emailCopy2 = document.getElementById('copy-email2');
+    if (emailCopy2) {
+      const getLang = () => {
+        const pref = localStorage.getItem('lang-pref') || 'auto';
+        return (pref === 'auto') ? detectLang() : pref;
+      };
+      const handle = (emailCopy2.dataset.handle || 'masterspike').replace(/^@/, '');
+      emailCopy2.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const span = emailCopy2.querySelector('span');
         const original = span.textContent;
         try {
           await navigator.clipboard.writeText(handle);
